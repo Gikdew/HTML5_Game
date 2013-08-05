@@ -2,25 +2,44 @@ var canvas = document.getElementById("main");
 var ctx = canvas.getContext("2d");
 var centerX = canvas.width/2;
 var centerY = canvas.height/2;
-var fps = 1;
-
+var fps = 60;
+var counter = 0;
+var arriba = true;
 //Init some variables
 var circles = [];
-for(var i = 1; i<=10; i++){
+for(var i = 1; i<=190; i++){
 	circles.push({
 		x: centerX,
 		y: centerY,
-		rad: i*10,
+		rad: i,
 	});
 }
 
+//Remove later
 for(var i in circles){
 	var circle = circles[i];
 	console.log(circle);
 }
 
 function updateCircle(){
+	if(arriba){
+		counter++;	
+		console.log(counter);
+		var circle = circles[counter - 1];
+		drawOneCircle(circle.x, circle.y, circle.rad, 'white');
+		if(counter == circles.length - 1) {
+			arriba = false;
+			return;
+		}				
+	}
 
+	if(arriba == false){
+		var circle = circles[counter];
+		drawOneCircle(circle.x, circle.y, circle.rad, 'white');
+		counter--;
+		if(counter == 0) arriba = true;
+		console.log(counter);
+	}
 }
 
 function drawBackground(){
@@ -33,17 +52,14 @@ function drawBackground(){
 function drawOneCircle(x,y,r,color){
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0,2*Math.PI);
-	ctx.lineWidth = Math.random();
+	ctx.lineWidth = 1;
 	ctx.strokeStyle = color;
 	ctx.stroke();	
 }
 
 function gameTick(){
 	drawBackground();
-	for(var j in circles){
-		var circle = circles[j];
-		drawOneCircle(circle.x, circle.y, circle.rad, 'white')
-	}
+	updateCircle();
 }
 
 setInterval(gameTick, 1000/fps);
