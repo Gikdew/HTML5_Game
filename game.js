@@ -5,6 +5,7 @@ var centerY = canvas.height/2;
 var fps = 60;
 var counter = 0;
 var arriba = true;
+
 //Init some variables
 var circles = [];
 for(var i = 1; i<=190; i++){
@@ -15,7 +16,7 @@ for(var i = 1; i<=190; i++){
 	});
 }
 
-//Remove later
+//REMOVE
 for(var i in circles){
 	var circle = circles[i];
 	console.log(circle);
@@ -26,7 +27,7 @@ function updateCircle(){
 		counter++;	
 		console.log(counter);
 		var circle = circles[counter - 1];
-		drawOneCircle(circle.x, circle.y, circle.rad, 'white');
+		drawOneCircle(circle.x, circle.y, circle.rad, 'white');		
 		if(counter == circles.length - 1) {
 			arriba = false;
 			return;
@@ -44,7 +45,7 @@ function updateCircle(){
 
 function drawBackground(){
 	ctx.save();
-	ctx.fillStyle="black";
+	ctx.fillStyle= 'black';
 	ctx.fillRect(0,0,canvas.width,canvas.height);
 	ctx.restore();
 }
@@ -55,6 +56,16 @@ function drawOneCircle(x,y,r,color){
 	ctx.lineWidth = 1;
 	ctx.strokeStyle = color;
 	ctx.stroke();	
+}
+
+//REMOVE
+function get_random_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
 }
 
 function gameTick(){
