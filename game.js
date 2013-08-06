@@ -12,7 +12,7 @@ var velocity = 1;
 
 //Init some variables
 var circles = [];
-for(var i = 0; i<=190; i+=velocity){
+for(var i = 50; i<=190; i+=velocity){
 	circles.push({
 		x: centerX,
 		y: centerY,
@@ -99,6 +99,9 @@ function collision(ax,ay,bx,by,rad){
 	//console.log(dis);
 	if(rad <= dis){ //I can change that to == if I want to now the exact Point of Collision
 		console.log('collision');
+	}else{
+		console.log('No collision');
+
 	}
 }
 
@@ -119,4 +122,4 @@ function gameTick(){
 	updateCircle();
 }
 
-setInterval(gameTick, 1000/fps);
+var interval = setInterval(gameTick, 1000/fps);
